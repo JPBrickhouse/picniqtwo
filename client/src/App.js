@@ -4,13 +4,6 @@ import yelpSearch from "./yelpSearch"
 
 function App() {
 
-  useEffect(() => {
-    yelpSearch()
-  }, [])
-
-
-
-
   return (
     <div>
       <p>Hello</p>

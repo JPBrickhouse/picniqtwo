@@ -1,25 +1,8 @@
-import yelp from "yelp-fusion"
+import axios from 'axios';
 
-require('dotenv').config()
-
-function yelpSearch() {
-
-    const apiKey = process.env.YELP_PICNIQTWO_API_KEY;
-
-    const searchRequest = {
-        term: 'Four Barrel Coffee',
-        location: 'san francisco, ca'
-    };
-
-    const client = yelp.client(apiKey);
-
-    client.search(searchRequest).then(response => {
-        const firstResult = response.jsonBody.businesses[0];
-        const prettyJson = JSON.stringify(firstResult, null, 4);
-        console.log(prettyJson);
-    }).catch(e => {
-        console.log(e);
-    });
-}
-
-export default yelpSearch;
+export default axios.create({
+    baseURL: 'https://cors-anywhere.herokuapp.com/https://api.yelp.com/v3',
+    headers: {
+        Authorization: `Bearer ${process.env.YELP_PICNIQTWO_API_KEY}`
+    }
+});
