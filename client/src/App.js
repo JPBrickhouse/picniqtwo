@@ -1,40 +1,40 @@
 import React from "react";
 
 // Importing the various components
-import Nav from "./Nav"
+import ApplicationNavigation from "./ApplicationNavigation"
 import Home from "./Home"
 import About from "./About"
 import Contact from "./Contact"
 
+// Importing reacter router dom
+import { BrowserRouter, Switch, Route, Link } from "react-router-dom";
 
-
+// The application function
 function App() {
-
-
-
-
-
   return (
-    <div>
-      {/* Navigation Bar */}
-      <Nav/>
+    <BrowserRouter>
+      <div>
+        
+        <ApplicationNavigation />
 
-      {/* START of Router Switch to switch between home, about, contact */}
-      {/* Home */}
-      <Home/>
+        <Switch>
+          <Route path="/contact">
+            <Contact />
+          </Route>
+          
+          <Route path="/about">
+            <About />
+          </Route>
+          
+          <Route path="/">
+            <Home />
+          </Route>
+        </Switch>
 
-      {/* About */}
-      <About/>
-
-      {/* Contact */}
-      <Contact/>
-      {/* END of Router Switch to switch between home, about, contact */}
-
-      {/* Placeholder text */}
-      <p>App</p>
-
-    </div>
+      </div>
+    </BrowserRouter>
   );
 }
 
+// Exporting the application function
 export default App;
