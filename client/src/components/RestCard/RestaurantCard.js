@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 
 // Importing the card component from React Bootstrap
 import Card from "react-bootstrap/Card"
@@ -7,37 +7,35 @@ import ListGroup from "react-bootstrap/ListGroup"
 import ListGroupItem from "react-bootstrap/ListGroupItem"
 
 
+// import testData from "../../test-data.json"
 
 
+const RestaurantCard = (props) => {
 
-const RestaurantCard = () => {
 
-    // PASS DOWN INIDIVIDUAL RESTAURANT INFORMATION AS PROPS
-    // Experiment with images
-    // Links to the restuarant website, phone number, contact, delivery websites, etc.
+    const [restaurantData, setRestaurantData] = useState(props.restData)
+
+    
+    // Need a SAVE button to display if the user is logged in or not
 
     return (
         <div>
-            <Card style={{ width: '18rem' }}>
+            <Card style={{"width": '18rem', "display": "flex", "textAlign":"center"}}>
                 {/* <Card.Img variant="top" src="https://picsum.photos/100x180" /> */}
-                <Image src="https://picsum.photos/180/100" fluid/>
+                {/* <Image src="https://picsum.photos/180/100" fluid/> */}
+                <Image src={restaurantData.thumb} fluid />
                 <Card.Body>
-                    <Card.Title>Card Title</Card.Title>
-                    <Card.Text>
-                        Some quick example text to build on the card title and make up the bulk of
-                        the card's content.
-                    </Card.Text>
-                </Card.Body>
-                <ListGroup className="list-group-flush">
-                    <ListGroupItem>Cras justo odio</ListGroupItem>
-                    <ListGroupItem>Dapibus ac facilisis in</ListGroupItem>
-                    <ListGroupItem>Vestibulum at eros</ListGroupItem>
-                </ListGroup>
-                <Card.Body>
-                    <Card.Link href="#">Card Link</Card.Link>
-                    <Card.Link href="#">Another Link</Card.Link>
+                    <Card.Title>{restaurantData.name}</Card.Title>
+                    <Card.Text>{restaurantData.cuisines}</Card.Text>
+                    <hr />
+                    <Card.Link href={restaurantData.menu_url} target="_blank" rel="noreferrer">Menu</Card.Link>
+                    <hr />
+                    <Card.Text>{restaurantData.location.address}</Card.Text>
+                    <hr />
+                    <Card.Link href={restaurantData.url} target="_blank" rel="noreferrer">Contact {restaurantData.name}</Card.Link>
                 </Card.Body>
             </Card>
+            <br/>
         </div>
     );
 }
