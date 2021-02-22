@@ -7,7 +7,7 @@ import RestCard from "../../components/RestCard/RestaurantCard"
 import Container from "react-bootstrap/Container"
 import Col from "react-bootstrap/Col"
 import Row from "react-bootstrap/Row"
-
+import Button from "react-bootstrap/Button"
 
 
 // TEST DATA FOR NOW
@@ -16,37 +16,60 @@ import testData from "../../test-data.json"
 
 const Home = () => {
 
-    // State objects holding the results
+    // State object holding the restaurant results
+    const [restaurantResults, setRestaurantResults] = useState([]);
 
-    // Move the Zomato call out of the useEffect and into a function
-    // (The function will get called when the submit button is pushed)
-    // For now, it exists in useEffect and only gets called once when the page loads
-    // useEffect(() => {
-    //     // Using fetch to call the Zomato API
-    //     fetch("/api/externalRoutes/zomatoSearch")
-    //         .then(response => response.json())
-    //         .catch(error => console.log(error))
-    //         .then(data => console.log(data))
-    // }, [])
-
-
+    // State object holding the park results
+    // ---- TBD ----
 
     // ONE BIG ASYNC FUNCTION THAT SETS VARIOUS STATES AND USES THE DATA
     // await --> get geocoded data (and make sure that it's valid)
     // await --> use geocoded data to get the restaurants
     // set state of the restaurant data
 
+    async function searchForRestaurants(event) {
+        event.preventDefault();
+
+        // Getting the address being searched from the input form text field
+        let addressBeingSearched = document.getElementById("addressSearch").value;
+        // Console logging the address for record keeping
+        console.log(addressBeingSearched);
+
+        // Hardcoded coordinates for now...
+        let latData = 41.891899;
+        let longData = -87.623772;
+
+        // Making the Zomato API call
+        fetch("/api/externalRoutes/zomatoSearch/" + latData + "/" + longData)
+            .then(response => response.json())
+            .catch(error => console.log(error))
+            .then(data => {
+
+                // Making sure that nearby restaurants exists BEFORE setting the restaurantsResults array
+                if (data.nearby_restaurants) {
+                    setRestaurantResults(data.nearby_restaurants)
+                }
+
+                console.log(data.nearby_restaurants)
+            })
+
+
+
+
+    }
 
     // Making sure that there is information to render prior to rendering
     let restaurantsToRender;
-    if(testData.nearby_restaurants) {
-        restaurantsToRender = testData.nearby_restaurants.map((singleRest) => (<RestCard key={singleRest.restaurant.id} restData={singleRest.restaurant}/>))
+    if (restaurantResults.length !== 0) {
+        restaurantsToRender = testData.nearby_restaurants.map((singleRest) => (<RestCard key={singleRest.restaurant.id} restData={singleRest.restaurant} />))
     }
 
 
     return (
         <div>
             <Container>
+                {/* Placeholder text */}
+                <p>Home</p>
 
                 {/* MAKE RESPONSIVE GRIDS WITH COLUMNS AND ROWS */}
 
@@ -56,18 +79,16 @@ const Home = () => {
 
                 {/* Instructions / Quick Description */}
 
-                {/* Search Bar */}
 
-                {/* Search Button */}
+                {/* Input Form */}
+                <form onSubmit={searchForRestaurants}>
+                    {/* Search Bar */}
+                    <input type="text" id="addressSearch" placeholder="Input an address!"></input>
+                    {/* Submit Button */}
+                    <input type="submit" value="Search"></input>
+                </form>
 
-
-
-
-                {/* Placeholder text */}
-                <p>Home</p>
-                
-                
-                {/* Individual Restaurant Card
+                {/* Individual Restaurant Cards
                 Conditionally display the cards ONLY when results have been searched for and found
                 Map over the results and pass them as props to the restaurant card */}
                 <div>

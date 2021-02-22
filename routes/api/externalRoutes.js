@@ -4,13 +4,17 @@ const axios = require('axios').default;
 require('dotenv').config()
 const zomatoKey = process.env.ZOMATO_API_KEY
 
+router.get("/zomatoSearch/:lat/:long", function (req, res) {
 
-router.get("/zomatoSearch", function (req, res) {
+    // Getting the latitude and longitude
+    let latData = req.params.lat;
+    let longData = req.params.long;
 
-    // Eventually incorporate lat and long dynamically
+    // Building the queryURL to pass to the API get request
+    let zomatoQueryURL = "https://developers.zomato.com/api/v2.1/geocode?lat=" + latData + "&lon=" + longData;
 
     // Making the axios request to the Zomato API
-    axios.get(`https://developers.zomato.com/api/v2.1/geocode?lat=41.891899&lon=-87.623772`, {
+    axios.get(zomatoQueryURL, {
         headers: {
             'user-key': zomatoKey
         }
@@ -21,7 +25,7 @@ router.get("/zomatoSearch", function (req, res) {
             // NEED to send response.data
             // Otherwise, I was getting "TypeError: Converting circular structure to JSON"
             res.send(response.data)
-            console.log(response.data)
+            // console.log(response.data)
         })
         .catch(error => console.log(error))
 })

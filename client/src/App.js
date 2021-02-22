@@ -11,35 +11,35 @@ import { BrowserRouter, Switch, Route, Link } from "react-router-dom";
 
 // The application function
 function App() {
-  return (
-    <BrowserRouter>
-      <div>
-        
-        {/* Navigation Bar Component */}
-        <ApplicationNavigation />
+	return (
+		<BrowserRouter>
+			<div>
 
-        {/* React Router Switch that will take users between the three pages */}
-        <Switch>
-          
-          {/* Contact Page */}
-          <Route path="/contact">
-            <Contact />
-          </Route>
-          
-          {/* About Page */}
-          <Route path="/about">
-            <About />
-          </Route>
-          
-          {/* Home Page */}
-          <Route path="/">
-            <Home />
-          </Route>
-        </Switch>
+				{/* Navigation Bar Component */}
+				<ApplicationNavigation />
 
-      </div>
-    </BrowserRouter>
-  );
+				{/* React Router Switch that will take users between the three pages */}
+				<Switch>
+
+					{/* Contact Page */}
+					<Route path="/contact">
+						<Contact />
+					</Route>
+
+					{/* About Page */}
+					<Route path="/about">
+						<About />
+					</Route>
+
+					{/* Home Page */}
+					<Route path="/">
+						<Home />
+					</Route>
+				</Switch>
+
+			</div>
+		</BrowserRouter>
+	);
 }
 
 // Exporting the application function
