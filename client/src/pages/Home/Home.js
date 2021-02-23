@@ -10,9 +10,6 @@ import Row from "react-bootstrap/Row"
 import Button from "react-bootstrap/Button"
 
 
-// TEST DATA FOR NOW
-import testData from "../../test-data.json"
-
 
 const Home = () => {
 

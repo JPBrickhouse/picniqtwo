@@ -1,5 +1,8 @@
 import React, { useState } from "react";
 
+// Importing the ExternalLink component
+import ExternalLink from "../../components/ExternalLink/ExternalLink"
+
 // Importing the card component from React Bootstrap
 import Card from "react-bootstrap/Card"
 import Image from "react-bootstrap/Image"
@@ -7,14 +10,9 @@ import ListGroup from "react-bootstrap/ListGroup"
 import ListGroupItem from "react-bootstrap/ListGroupItem"
 
 
-// import testData from "../../test-data.json"
-
-
 const RestaurantCard = (props) => {
 
-
-    const [restaurantData, setRestaurantData] = useState(props.restData)
-
+    let restaurantData = props.restData;
     
     // Need a SAVE button to display if the user is logged in or not
 
