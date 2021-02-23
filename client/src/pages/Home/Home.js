@@ -58,7 +58,7 @@ const Home = () => {
     // Making sure that there is information to render prior to rendering
     let restaurantsToRender;
     if (restaurantResults.length !== 0) {
-        restaurantsToRender = testData.nearby_restaurants.map((singleRest) => (<RestCard key={singleRest.restaurant.id} restData={singleRest.restaurant} />))
+        restaurantsToRender = restaurantResults.map((singleRest) => (<RestCard key={singleRest.restaurant.id} restData={singleRest.restaurant} />))
     }
 
 
